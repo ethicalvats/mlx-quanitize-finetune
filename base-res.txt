@@ -1,0 +1,28 @@
+➜ mlx_lm.chat --model mlx-community/Qwen3.6-27B-4bit
+Fetching 14 files: 100%|████████████████| 14/14 [00:00<00:00, 24913.13it/s]
+Download complete: : 0.00B [00:02, ?B/s]              0/14 [00:00<?, ?it/s]
+[INFO] Starting chat session with mlx-community/Qwen3.6-27B-4bit.
+The command list:
+- 'q' to exit
+- 'r' to reset the chat
+- 'h' to display these commands
+>> how to slve a 2x2 ruberics cube?
+Here's a thinking process:
+
+1.  **Understand User Query**: The user is asking "how to slve a 2x2 ruberics cube?" (Note: typos "slve" -> "solve", "ruberics" -> "Rubik's"). They want instructions on solving a 2x2 Rubik's Cube.
+
+2.  **Identify Key Information Needed**:
+   - What is a 2x2 Rubik's Cube? (Pocket Cube)
+   - Basic notation/terminology (optional but helpful)
+   - Step-by-step solving method
+   - Common algorithms needed
+   - Tips for beginners
+
+3.  **Determine the Best Approach**:
+   - The most beginner-friendly method for 2x2 is the "Layer-by-Layer" method (similar to 3x3 but simplified).
+   - Steps typically:
+     1. Solve the first layer (bottom layer)
+     2. Orient the last layer (OLL - make the top face one color)
+     3. Permute the last layer (PLL - position the corners correctly)
+   - I should provide clear, step-by-step instructions with simple algorithms.
+   - Use

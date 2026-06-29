@@ -1,0 +1,69 @@
+➜ python train.py
+Fetching 14 files: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:00<00:00, 3021.99it/s]
+Download complete: : 0.00B [00:00, ?B/s]                                                                                      | 0/14 [00:00<?, ?it/s]
+/opt/homebrew/Caskroom/miniconda/base/envs/mlx-quant-ft-venv/lib/python3.12/site-packages/mlx_tune/model.py:337: UserWarning: LoRA dropout may have limited support in MLX. Dropout value will be set but behavior may differ from PyTorch PEFT.
+  warnings.warn(
+LoRA configuration set: rank=8, alpha=16, modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj'], dropout=0.05
+Trainer initialized:
+  Output dir: lora_finetuned
+  Adapter path: lora_finetuned/adapters
+  Learning rate: 0.0002
+  Iterations: 2
+  Batch size: 1
+  LoRA r=8, alpha=16
+  Native training: True
+  LR scheduler: linear
+  Grad checkpoint: False
+train_on_responses_only enabled:
+  instruction_part: <|im_start|>user
+
+  response_part: <|im_start|>assistant
+<think>
+Starting training...
+======================================================================
+Starting Fine-Tuning
+======================================================================
+
+[Using Native MLX Training]
+
+Applying LoRA adapters...
+Applying LoRA to 16 layers: {'rank': 8, 'scale': 2.0, 'dropout': 0.05, 'keys': ['mlp.down_proj', 'mlp.gate_proj', 'mlp.up_proj', 'self_attn.k_proj', 'self_attn.o_proj', 'self_attn.q_proj', 'self_attn.v_proj']}
+✓ LoRA applied successfully to 16 layers
+  Trainable LoRA parameters: 128
+Preparing training data...
+  Detected format: chatml
+✓ Prepared 12181 training samples
+  Saved to: lora_finetuned/train.jsonl
+✓ Created validation set (copied from train)
+
+Training configuration:
+  Iterations: 2
+  Batch size: 1
+  Learning rate: 0.0002
+  LR scheduler: linear
+  Grad checkpoint: True
+  Adapter file: lora_finetuned/adapters/adapters.safetensors
+
+  Response-only training enabled (mask_prompt=True)
+Loaded 12181 training samples, 12181 validation samples
+Starting training loop...
+TensorBoard writer initialized at: /Users/vatsmax/Projects/mlx-quanitize-finetune/tb_logs
+Starting training..., iters: 2
+Calculating loss...:  40%|█████████████████████████████████████▏                                                       | 2/5 [00:05<00:07,  2.46s/it][WARNING] Some sequences are longer than 768 tokens. The longest sentence 844 will be truncated to 768. Consider pre-splitting your data to save memory.
+Calculating loss...: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:11<00:00,  2.39s/it]
+Iter 1: Val loss 0.810, Val took 11.966s
+Iter 0: val_loss = 0.8099
+Iter 1: Train loss 0.458, Learning Rate 2.000e-04, It/sec 0.070, Tokens/sec 17.554, Trained Tokens 252, Peak mem 23.964 GB
+Iter 1: train_loss = 0.4578, lr = 2.00e-04
+Calculating loss...: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:07<00:00,  1.56s/it]
+Iter 2: Val loss 0.780, Val took 7.801s
+Iter 1: val_loss = 0.7803
+Iter 2: Train loss 0.437, Learning Rate 1.000e-04, It/sec 0.086, Tokens/sec 16.798, Trained Tokens 448, Peak mem 23.964 GB
+Iter 2: train_loss = 0.4365, lr = 1.00e-04
+Saved final weights to lora_finetuned/adapters/adapters.safetensors.
+  Adapter config saved to: lora_finetuned/adapters/adapter_config.json
+
+======================================================================
+Training Complete!
+======================================================================
+  Adapters saved to: lora_finetuned/adapters
