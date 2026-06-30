@@ -1,19 +1,20 @@
 ➜ python train.py
-Fetching 14 files: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:00<00:00, 2944.70it/s]
+Fetching 14 files: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:00<00:00, 6638.06it/s]
 Download complete: : 0.00B [00:00, ?B/s]                                                                                      | 0/14 [00:00<?, ?it/s]
-/opt/homebrew/Caskroom/miniconda/base/envs/mlx-quant-ft-venv/lib/python3.12/site-packages/mlx_tune/model.py:337: UserWarning: LoRA dropout may have limited support in MLX. Dropout value will be set but behavior may differ from PyTorch PEFT.
-  warnings.warn(
-LoRA configuration set: rank=8, alpha=16, modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj'], dropout=0.05
+LoRA configuration set: rank=8, alpha=16, modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj'], dropout=0.0
+Resuming training: Loading existing adapters from ./lora_finetuned/adapters_16layers_step200
+Loading adapters from lora_finetuned/adapters_16layers_step200...
+✓ Adapters loaded successfully
 Trainer initialized:
   Output dir: lora_finetuned
   Adapter path: lora_finetuned/adapters
-  Learning rate: 0.0002
-  Iterations: 50
+  Learning rate: 3e-05
+  Iterations: 350
   Batch size: 1
   LoRA r=8, alpha=16
   Native training: True
   LR scheduler: linear
-  Grad checkpoint: False
+  Grad checkpoint: True
 train_on_responses_only enabled:
   instruction_part: <|im_start|>user
 
@@ -25,51 +26,38 @@ Starting Fine-Tuning
 ======================================================================
 
 [Using Native MLX Training]
-
-Applying LoRA adapters...
-Applying LoRA to 16 layers: {'rank': 8, 'scale': 2.0, 'dropout': 0.05, 'keys': ['mlp.down_proj', 'mlp.gate_proj', 'mlp.up_proj', 'self_attn.k_proj', 'self_attn.o_proj', 'self_attn.q_proj', 'self_attn.v_proj']}
-✓ LoRA applied successfully to 16 layers
-  Trainable LoRA parameters: 128
 Preparing training data...
   Detected format: chatml
 ✓ Prepared 12181 training samples
   Saved to: lora_finetuned/train.jsonl
-✓ Created validation set (copied from train)
+✓ Prepared validation set
 
 Training configuration:
-  Iterations: 50
+  Iterations: 350
   Batch size: 1
-  Learning rate: 0.0002
+  Learning rate: 3e-05
   LR scheduler: linear
   Grad checkpoint: True
   Adapter file: lora_finetuned/adapters/adapters.safetensors
 
   Response-only training enabled (mask_prompt=True)
-Loaded 12181 training samples, 12181 validation samples
+Loaded 12181 training samples, 1 validation samples
 Starting training loop...
-TensorBoard writer initialized at: /Users/vatsmax/Projects/mlx-quanitize-finetune/tb_logs
-Starting training..., iters: 50
-Calculating loss...:  20%|██████████████████▌                                                                          | 1/5 [00:01<00:05,  1.48s/it][WARNING] Some sequences are longer than 768 tokens. The longest sentence 1053 will be truncated to 768. Consider pre-splitting your data to save memory.
-Calculating loss...:  80%|██████████████████████████████████████████████████████████████████████████▍                  | 4/5 [00:09<00:02,  2.25s/it][WARNING] Some sequences are longer than 768 tokens. The longest sentence 1643 will be truncated to 768. Consider pre-splitting your data to save memory.
-Calculating loss...: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:14<00:00,  2.90s/it]
-Iter 1: Val loss 0.807, Val took 14.502s
-Iter 0: val_loss = 0.8068
-Iter 1: Train loss 1.929, Learning Rate 2.000e-04, It/sec 0.295, Tokens/sec 10.311, Trained Tokens 35, Peak mem 17.303 GB
-Iter 1: train_loss = 1.9286, lr = 2.00e-04
-Iter 2: Train loss 0.463, Learning Rate 1.960e-04, It/sec 0.096, Tokens/sec 17.636, Trained Tokens 218, Peak mem 21.428 GB
-Iter 2: train_loss = 0.4631, lr = 1.96e-04
-Iter 3: Train loss 0.852, Learning Rate 1.920e-04, It/sec 0.227, Tokens/sec 11.825, Trained Tokens 270, Peak mem 21.428 GB
-Iter 3: train_loss = 0.8522, lr = 1.92e-04
-Iter 4: Train loss 0.372, Learning Rate 1.880e-04, It/sec 0.154, Tokens/sec 17.556, Trained Tokens 384, Peak mem 21.428 GB
-Iter 4: train_loss = 0.3723, lr = 1.88e-04
-Iter 5: Train loss 0.404, Learning Rate 1.840e-04, It/sec 0.128, Tokens/sec 18.070, Trained Tokens 525, Peak mem 21.428 GB
-Iter 5: train_loss = 0.4043, lr = 1.84e-04
-Iter 6: Train loss 0.765, Learning Rate 1.800e-04, It/sec 0.164, Tokens/sec 39.277, Trained Tokens 765, Peak mem 21.428 GB
-Iter 6: train_loss = 0.7646, lr = 1.80e-04
-Iter 7: Train loss 0.281, Learning Rate 1.760e-04, It/sec 0.163, Tokens/sec 28.200, Trained Tokens 938, Peak mem 21.428 GB
-Iter 7: train_loss = 0.2814, lr = 1.76e-04
-[WARNING] Some sequences are longer than 768 tokens. The longest sentence 1075 will be truncated to 768. Consider pre-splitting your data to save memory.
-libc++abi: terminating due to uncaught exception of type std::runtime_error: [METAL] Command buffer execution failed: Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
-[1]    73242 abort      python train.py
-/opt/homebrew/Caskroom/miniconda/base/envs/mlx-quant-ft-venv/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 4 leaked semaphore objects to clean up at shutdown
-  warnings.warn('resource_tracker: There appear to be %d '
+TensorBoard writer initialized at: /Users/vatsmax/Projects/mlx-quanitize-finetune/tb_logs (resuming from step 200)
+Adjusting training iterations to run 150 steps (stopping at step 350)
+Offsetting learning rate schedule by 200 steps
+Successfully injected gradient clipping (max_norm=1.0) into the optimizer.
+Starting training..., iters: 150
+Calculating loss...:   0%|                                                                                                     | 0/1 [00:00<?, ?it/s][WARNING] Some sequences are longer than 512 tokens. The longest sentence 669 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:03<00:00,  3.50s/it]
+Iter 1: Val loss 0.747, Val took 3.501s
+Iter 200: val_loss = 0.7472
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 8110 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 5: Train loss nan, Learning Rate 1.251e-05, It/sec 0.090, Tokens/sec 14.173, Trained Tokens 791, Peak mem 25.565 GB
+NaN or Inf found in input tensor.
+Iter 205: train_loss = nan, lr = 1.25e-05
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 1892 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 10: Train loss nan, Learning Rate 1.209e-05, It/sec 0.104, Tokens/sec 21.236, Trained Tokens 1810, Peak mem 25.565 GB
+NaN or Inf found in input tensor.
+Iter 210: train_loss = nan, lr = 1.21e-05
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 850 will be truncated to 512. Consider pre-splitting your data to save memory.

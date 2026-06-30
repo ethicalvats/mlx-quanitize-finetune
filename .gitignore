@@ -1,3 +1,6 @@
 __pycache__/
 mlx-finetune-data/
 *.pdf
+lora_finetuned/
+Qwen3.6-27B-Claude-Opus-Reasoning-Distilled-MLX/
+tb_logs/
